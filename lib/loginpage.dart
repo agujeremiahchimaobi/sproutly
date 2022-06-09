@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sproutly/homepage.dart';
+import 'package:sproutly/customwidgets.dart';
+import 'package:sproutly/forgotpasswordpage.dart';
+import 'package:sproutly/notyoupage.dart';
+import 'package:sproutly/tabbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,8 +35,10 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       width: 10.0,
                     ),
-                    hand(),
-                  ],
+                Image.asset(
+                  'images/Waving.png',
+                  height: 30.0,
+                ),],
                 ),
               ),
               const SizedBox(
@@ -41,13 +46,24 @@ class _LoginPageState extends State<LoginPage> {
               ),
               me(),
               const SizedBox(
-                height: 20.0,
+                height: 50.0,
               ),
               passwordField(),
               const SizedBox(
                 height: 100.0,
               ),
-              login(),
+              Padding(padding: const EdgeInsets.only(left: 20, right: 20.0, top: 20.0),
+                child: GreenButton(
+                    text: 'Login',
+                    ontap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Tabbar(),
+                        ),
+                      );
+                    }),
+              ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -127,45 +143,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget login() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-      child: InkWell(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()));
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.green[900],
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 60.0,
-          width: 400,
-          child: const Center(
-            child: Text(
-              'Login',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 20.0,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget forgotPassword() {
     return Padding(
       padding: const EdgeInsets.only(
         left: 20.0,
       ),
-      child: Text(
-        'Forgot Password?',
-        style: TextStyle(
-            fontFamily: 'Poppins', color: Colors.green[900], fontSize: 21.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ForgotPassword()));
+        },
+        child: Text(
+          'Forgot Password?',
+          style: TextStyle(
+              fontFamily: 'Poppins', color: Colors.green[900], fontSize: 21.0),
+        ),
       ),
     );
   }
@@ -179,10 +171,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget notYou() {
     return Flexible(
-      child: Text(
-        'Not You?',
-        style: TextStyle(
-            fontFamily: 'Poppins', color: Colors.green[900], fontSize: 21.0),
+      child: InkWell(
+        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> const NotYouPage()));},
+        child: Text(
+          'Not You?',
+          style: TextStyle(
+              fontFamily: 'Poppins', color: Colors.green[900], fontSize: 21.0),
+        ),
       ),
     );
   }
@@ -191,13 +186,6 @@ class _LoginPageState extends State<LoginPage> {
     return const Icon(
       Icons.fingerprint,
       size: 30,
-    );
-  }
-
-  Widget hand() {
-    return Image.asset(
-      'images/Waving.png',
-      height: 30.0,
     );
   }
 
